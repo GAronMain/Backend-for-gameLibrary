@@ -17,15 +17,7 @@ class GameController extends Controller
         // $games = Game::all();
         // return response()->json(["games" => $games]);
 
-        return GameResource::collection(Game::all());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return GameResource::collection(Game::all()); //Kiírja az összes játékot
     }
 
     /**
@@ -34,7 +26,10 @@ class GameController extends Controller
     public function store(StoreGameRequest $request)
     {
         // $game = Game::create($request->validated());
-        // return Game
+        // return response()->json($game, 201);      
+
+        $game = Game::create($request->validated());
+        return GameResource::make($game);
     }
 
     /**
@@ -42,15 +37,7 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Game $game)
-    {
-        //
+        return GameResource::make($game);
     }
 
     /**
@@ -58,7 +45,8 @@ class GameController extends Controller
      */
     public function update(UpdateGameRequest $request, Game $game)
     {
-        //
+        $game->update($request->validate());
+        return GameResource::make($game);
     }
 
     /**
@@ -66,6 +54,7 @@ class GameController extends Controller
      */
     public function destroy(Game $game)
     {
-        //
+        $game->delete();
+        return response()->noContent();
     }
 }

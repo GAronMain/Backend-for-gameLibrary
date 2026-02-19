@@ -11,7 +11,7 @@ class StoreGameRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,24 @@ class StoreGameRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => "required|string|max:255|unique:games,name",
+            "release_year" => "required|integer|min:1970|max:2030",
+            "genre" => "required|string|max:100",
+            "publisher_id" => "required|integer|exists:publishers,_id",
+            "platforms" => "required|array|min:1",
+            "platforms.*" => "required|string|distinct|max:15",
+            "cover" => "nullable|url|max:255",
+            "freetogame_url" => "nullable|url|max:255"
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.unique' => 'A game with this name already exists.',
+            'platforms.min' => 'Please select at least one platform.',
+            'platforms.*.distinct' => 'Duplicate platforms are not allowed.',
+            'publisher_id.exists' => 'The selected publisher does not exist.',
         ];
     }
 }
