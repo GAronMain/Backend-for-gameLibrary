@@ -14,9 +14,6 @@ class GameController extends Controller
      */
     public function index()
     {
-        // $games = Game::all();
-        // return response()->json(["games" => $games]);
-
         return GameResource::collection(Game::all()); //Kiírja az összes játékot
     }
 
@@ -45,7 +42,7 @@ class GameController extends Controller
      */
     public function update(UpdateGameRequest $request, Game $game)
     {
-        $game->update($request->validate());
+        $game->update($request->validated());
         return GameResource::make($game);
     }
 

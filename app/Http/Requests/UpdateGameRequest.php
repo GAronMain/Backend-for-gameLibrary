@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateGameRequest extends FormRequest
 {
@@ -21,8 +22,16 @@ class UpdateGameRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
-            // TODO : ird meg a validációt
+            "name" => "nullable|string|max:255",
+            "release_year" => "required|integer|min:1970|max:2030",
+            "genre" => "required|string|max:100",
+            "publisher_id" => "required|integer|exists:publishers,id",
+            "platforms" => "required|array|min:1",
+            "platforms.*" => "required|string|distinct|max:15",
+            "cover" => "nullable|url|max:255",
+            "freetogame_url" => "nullable|url|max:255"
         ];
     }
 }

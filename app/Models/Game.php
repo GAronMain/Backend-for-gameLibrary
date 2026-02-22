@@ -11,7 +11,7 @@ class Game extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        "name",
         "release_year",
         "genre",
         "publisher_id",
@@ -21,10 +21,9 @@ class Game extends Model
     ];
 
     protected $casts = [
-        'platforms' => 'json',   // ← This is the key change!
+        "platforms" => "json",   // ← This is the key change!
         // or 'json-array' if you specifically want array (not Collection)
         // 'platforms' => 'json-array',
     ];
 
-    protected $primaryKey = '_id';
 }
