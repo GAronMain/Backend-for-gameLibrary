@@ -46,4 +46,6 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public $timestamps = false; //Letiltja az automatikus created_at / updated_at kezelést.
 }
