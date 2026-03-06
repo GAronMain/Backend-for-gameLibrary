@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CollectibleController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\PublisherController;
 use Illuminate\Http\Request;
@@ -24,6 +25,6 @@ Route::middleware("auth:sanctum")->group(function () {
 //Protected Routes = still in progress
 Route::apiResources([
     "games" => GameController::class,
-    "publishers" => PublisherController::class
-    
+    "publishers" => PublisherController::class,
+    "collectibles" => CollectibleController::class
 ]);
