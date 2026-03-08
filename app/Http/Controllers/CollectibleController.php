@@ -39,8 +39,8 @@ class CollectibleController extends Controller
      */
     public function update(UpdateCollectibleRequest $request, Collectible $collectible)
     {
-        //$game->update($request->validated());
-        //return GameResource::make($game);
+        $collectible->update($request->validated());
+        return CollectibleResource::make($collectible);
     }
 
     /**

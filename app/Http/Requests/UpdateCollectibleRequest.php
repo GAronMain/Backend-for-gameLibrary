@@ -11,7 +11,7 @@ class UpdateCollectibleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class UpdateCollectibleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "game_id" => "required|integer|max:10",
+            "type" => "required|string|max:100",
+            "description" => "required|string|max:155",
+            "images" => "required|array|min:1",
+            'images.*' => 'url',
+            "map_location" => "nullable|array"
         ];
     }
 }
