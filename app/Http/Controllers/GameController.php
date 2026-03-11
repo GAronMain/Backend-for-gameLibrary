@@ -7,14 +7,21 @@ use App\Http\Requests\StoreGameRequest;
 use App\Http\Requests\UpdateGameRequest;
 use App\Http\Resources\GameResource;
 
+
 class GameController extends Controller
 {
+    public function __construct()
+    {
+        // Require auth for everything EXCEPT index and show
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return GameResource::collection(Game::all()); //Kiírja az összes játékot
+        return GameResource::collection(Game::all())->resolve(); //Kiírja az összes játékot
     }
 
     /**
@@ -22,9 +29,6 @@ class GameController extends Controller
      */
     public function store(StoreGameRequest $request)
     {
-        // $game = Game::create($request->validated());
-        // return response()->json($game, 201);      
-
         $game = Game::create($request->validated());
         return GameResource::make($game);
     }
@@ -34,7 +38,7 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        return GameResource::make($game);
+        return GameResource::make($game)->resolve();
     }
 
     /**

@@ -14,7 +14,7 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        return PublisherResource::collection(Publisher::all());
+        return PublisherResource::collection(Publisher::all())->resolve();
     }
 
     /**
@@ -31,7 +31,7 @@ class PublisherController extends Controller
      */
     public function show(Publisher $publisher)
     {
-        return PublisherResource::make($publisher);
+        return PublisherResource::make($publisher)->resolve();
     }
 
     /**

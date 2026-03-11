@@ -5,23 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Favorite;
 use App\Http\Requests\StoreFavoriteRequest;
 use App\Http\Requests\UpdateFavoriteRequest;
+use App\Http\Resources\FavoriteResource;
 
 class FavoriteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return FavoriteResource::collection(Favorite::all())->resolve();
     }
 
     /**
@@ -29,31 +19,31 @@ class FavoriteController extends Controller
      */
     public function store(StoreFavoriteRequest $request)
     {
-        //
+        $favorite = Favorite::create($request->validated());
+        return FavoriteResource::make($favorite);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Favorite $favorite)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Favorite $favorite)
-    {
-        //
-    }
+    // public function show($gameId)
+    // {
+    //     $favorite = Favorite::where('user_id', auth()->id())
+    //         ->where('game_id', $gameId)
+    //         ->firstOrFail();
+
+        
+    //     return new FavoriteResource($favorite->toArray());
+    // }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateFavoriteRequest $request, Favorite $favorite)
-    {
-        //
+    {   
+        $favorite->update($request->validated());
+        return FavoriteResource::make($favorite);
     }
 
     /**
@@ -61,6 +51,7 @@ class FavoriteController extends Controller
      */
     public function destroy(Favorite $favorite)
     {
-        //
+        $favorite->delete();
+        return response()->noContent();
     }
 }
