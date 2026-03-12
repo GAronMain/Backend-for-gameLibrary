@@ -9,6 +9,11 @@ use App\Http\Resources\CollectibleResource;
 
 class CollectibleController extends Controller
 {
+    public function __construct()
+    {
+        // Require auth for everything EXCEPT index and show
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+    }
     /**
      * Display a listing of the resource.
      */

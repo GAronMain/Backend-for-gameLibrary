@@ -19,11 +19,4 @@ class Game extends Model
         "cover",
         "freetogame_url"
     ];
-
-    protected $casts = [
-        "platforms" => "json",   // ← This is the key change!
-        // or 'json-array' if you specifically want array (not Collection)
-        // 'platforms' => 'json-array',
-    ];
-
 }

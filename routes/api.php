@@ -16,12 +16,8 @@ Route::get('/user', function (Request $request) {
 Route::post("register", [AuthController::class, "register"]);
 Route::post("login", [AuthController::class, "login"]);
 Route::apiResource("games", GameController::class);
-
-Route::apiResources([
-    "publishers" => PublisherController::class,
-    "collectibles" => CollectibleController::class,
-]);
-
+Route::apiResource("publishers", PublisherController::class);
+Route::apiResource("collectibles", CollectibleController::class);
 
 
 //Protected Routes = working
