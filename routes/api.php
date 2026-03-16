@@ -12,23 +12,22 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+
 //Public Routes
 Route::post("register", [AuthController::class, "register"]);
 Route::post("login", [AuthController::class, "login"]);
+
 Route::apiResource("games", GameController::class);
 Route::apiResource("publishers", PublisherController::class);
 Route::apiResource("collectibles", CollectibleController::class);
 
-
-//Protected Routes = working
+//Protected Routes
 Route::middleware("auth:sanctum")->group(function () {
     Route::post("logout", [AuthController::class, "logout"]);
-    
-    //ez meg nem mukodik, rossz ugy ahogy van
-    Route::get("favorites", [FavoriteController::class, "index"]);      // List all my favorites
-    Route::get("favorites/{gameId}", [FavoriteController::class, "show"]); // Check specific game
-    Route::post("favorites/{gameId}", [FavoriteController::class, "store"]); // Add to favorites
-    Route::delete("favorites/{gameId}", [FavoriteController::class, "destroy"]); // Remove
+
+    Route::get("favorites", [FavoriteController::class, "index"]);
+    Route::get("favorites/{gameId}", [FavoriteController::class, "show"]);
+    Route::post("favorites/{gameId}", [FavoriteController::class, "store"]);
+    Route::delete("favorites/{gameId}", [FavoriteController::class, "destroy"]);
+    Route::get("favorites/{gameId}", [FavoriteController::class, "show"]);
 });
-
-

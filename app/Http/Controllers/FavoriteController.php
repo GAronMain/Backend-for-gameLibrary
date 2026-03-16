@@ -6,52 +6,62 @@ use App\Models\Favorite;
 use App\Http\Requests\StoreFavoriteRequest;
 use App\Http\Requests\UpdateFavoriteRequest;
 use App\Http\Resources\FavoriteResource;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class FavoriteController extends Controller
 {
     public function index()
     {
-        return FavoriteResource::collection(Favorite::all())->resolve();
+        $favorites = Favorite::where('user_id', auth()->id())->get();
+
+        if ($favorites->isEmpty()) {
+            return response()->json(['message' => 'Még nincs kedvenc játékod.'], 200);
+        }
+
+        return FavoriteResource::collection($favorites)->resolve();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreFavoriteRequest $request)
+    public function store(StoreFavoriteRequest $request, $gameId) 
     {
-        $favorite = Favorite::create($request->validated());
-        return FavoriteResource::make($favorite);
+        $userId = Auth::id(); 
+
+        $favorite = Favorite::create([
+            'user_id' => $userId,
+            'game_id' => $gameId
+        ]);
+
+        return (new FavoriteResource($favorite))
+            ->response()
+            ->setStatusCode(201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-
-    // public function show($gameId)
-    // {
-    //     $favorite = Favorite::where('user_id', auth()->id())
-    //         ->where('game_id', $gameId)
-    //         ->firstOrFail();
-
-        
-    //     return new FavoriteResource($favorite->toArray());
-    // }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateFavoriteRequest $request, Favorite $favorite)
-    {   
-        $favorite->update($request->validated());
-        return FavoriteResource::make($favorite);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Favorite $favorite)
+    public function show($gameId)
     {
-        $favorite->delete();
+        $favorite = Favorite::where('user_id', auth()->id())
+            ->where('game_id', $gameId)
+            ->first();
+
+        if (!$favorite) {
+            return response()->json([
+                'message' => 'Ez a játék nincs a kedvenceid között.'
+            ], 404);
+        }
+
+        return new FavoriteResource($favorite);
+    }
+
+
+    public function destroy($gameId)
+    {
+        $deleted = Favorite::where('user_id', auth()->id())
+            ->where('game_id', $gameId)
+            ->delete();
+
+        if (!$deleted) {
+            return response()->json(['message' => 'Ez a játék nem volt a kedvenceid között.'], 404);
+        }
+
         return response()->noContent();
     }
 }
