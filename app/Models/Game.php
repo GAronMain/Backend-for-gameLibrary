@@ -19,4 +19,8 @@ class Game extends Model
         "cover",
         "freetogame_url"
     ];
+
+    protected $casts = [
+    'platforms' => 'array',
+];
 }

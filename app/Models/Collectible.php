@@ -18,10 +18,10 @@ class Collectible extends Model
         "map_location"
     ];
 
-    public $timestamps = false;
-
     protected $casts = [
-    'images' => 'array',
-    'map_location' => 'array',
-];
+        'images' => 'array',
+        'map_location' => 'array',
+    ];
+
+    public $timestamps = false;
 }
