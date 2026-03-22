@@ -36,8 +36,16 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Game $game)
+    public function show($id)
     {
+        $game = Game::find($id);
+
+        if (!$game) {
+            return response()->json([
+                "success" => false,
+                "message" => "Sajnos nincs ilyen játék az adatbázisunkban"
+            ], 404);
+        }
         return GameResource::make($game)->resolve();
     }
 
