@@ -34,8 +34,16 @@ class CollectibleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Collectible $collectible)
+    public function show($id)
     {
+        $collectible = Collectible::find($id);
+
+        if (!$collectible) {
+            return response()->json([
+                "success" => false,
+                "message" => "Sajnos nincs ilyen kollekció az adatbázisunkban"
+            ], 404);
+        }
         return CollectibleResource::make($collectible)->resolve();
     }
 
