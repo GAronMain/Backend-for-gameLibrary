@@ -1,4 +1,4 @@
-FROM php:8.5.4RC1-fpm-alpine3.22
+FROM php:8.5.5RC1-fpm-alpine3.22
 
 # Alap csomagok
 RUN apk add --no-cache \
