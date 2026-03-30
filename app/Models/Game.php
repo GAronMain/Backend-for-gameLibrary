@@ -20,7 +20,20 @@ class Game extends Model
         "freetogame_url"
     ];
 
-    protected $casts = [
-    'platforms' => 'array',
-];
+    protected $casts = ['platforms' => 'array',];
+
+    public function publisher()
+    {
+        return $this->belongsTo(Publisher::class);
+    }
+
+    public function collectibles()
+    {
+        return $this->hasMany(Collectible::class);
+    }
+    
+    public function favoritedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'favorites');
+    }
 }

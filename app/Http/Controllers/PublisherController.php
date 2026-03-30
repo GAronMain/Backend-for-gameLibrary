@@ -34,8 +34,16 @@ class PublisherController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Publisher $publisher)
+    public function show($id)
     {
+        $publisher = Publisher::find($id);
+
+        if (!$publisher) {
+            return response()->json([
+                "success" => false,
+                "message" => "Sajnos nincs ilyen kiado az adatbázisunkban"
+            ], 404);
+        }
         return PublisherResource::make($publisher)->resolve();
     }
 

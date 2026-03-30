@@ -24,4 +24,9 @@ class Collectible extends Model
     ];
 
     public $timestamps = false;
+
+    public function game()
+    {
+        return $this->belongsTo(Game::class);
+    }
 }
