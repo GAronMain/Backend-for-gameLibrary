@@ -14,7 +14,7 @@ class GameController extends Controller
     public function __construct()
     {
         // Require auth for everything EXCEPT index and show
-        $this->middleware('auth:sanctum')->except(['index', 'show']);
+        $this->middleware('auth:sanctum')->except(['index', 'show', "collectiblesShow"]);
     }
 
     /**
@@ -71,7 +71,7 @@ class GameController extends Controller
         /**
      * Get all collectibles for a specific game by gameId
      */
-    public function collectibles($gameId)
+    public function collectiblesShow($gameId)
     {
         $game = Game::find($gameId);
 
