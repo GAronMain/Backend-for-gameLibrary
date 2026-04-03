@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Game;
 use App\Http\Requests\StoreGameRequest;
 use App\Http\Requests\UpdateGameRequest;
+use App\Http\Resources\CollectibleResource;
 use App\Http\Resources\GameResource;
 
 
@@ -65,5 +66,25 @@ class GameController extends Controller
     {
         $game->delete();
         return response()->noContent();
+    }
+
+        /**
+     * Get all collectibles for a specific game by gameId
+     */
+    public function collectibles($gameId)
+    {
+        $game = Game::find($gameId);
+
+        if (!$game) {
+            return response()->json([
+                "success" => false,
+                "message" => "Sajnos nincs ilyen játék az adatbázisunkban"
+            ], 404);
+        }
+
+        $collectibles = $game->collectibles;   // feltételezem, hogy van collectibles() relationship a Game modelben
+
+        return CollectibleResource::collection($collectibles)->resolve(); 
+        // vagy ha nincs CollectibleResource-od: return $collectibles;
     }
 }

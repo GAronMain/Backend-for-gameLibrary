@@ -29,7 +29,7 @@ class Game extends Model
 
     public function collectibles()
     {
-        return $this->hasMany(Collectible::class);
+        return $this->hasMany(Collectible::class, "game_id");
     }
     
     public function favoritedByUsers()

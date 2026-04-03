@@ -20,6 +20,7 @@ Route::post("login", [AuthController::class, "login"]);
 Route::apiResource("games", GameController::class);
 Route::apiResource("publishers", PublisherController::class);
 Route::apiResource("collectibles", CollectibleController::class);
+Route::get('games/{gameId}/collectibles', [GameController::class, 'collectibles']);
 
 //Protected Routes
 Route::middleware("auth:sanctum")->group(function () {
