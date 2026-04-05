@@ -17,10 +17,10 @@ Route::get('/user', function (Request $request) {
 Route::post("register", [AuthController::class, "register"]);
 Route::post("login", [AuthController::class, "login"]);
 
+Route::get('games/{gameId}/collectibles', [GameController::class, 'collectiblesShow']);
 Route::apiResource("games", GameController::class);
 Route::apiResource("publishers", PublisherController::class);
 Route::apiResource("collectibles", CollectibleController::class);
-Route::get('games/{gameId}/collectibles', [GameController::class, 'collectiblesShow']);
 
 //Protected Routes
 Route::middleware("auth:sanctum")->group(function () {
