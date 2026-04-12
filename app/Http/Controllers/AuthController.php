@@ -42,15 +42,25 @@ class AuthController extends Controller
         ], 201);
     }
 
-    public function logout() {
+    public function logout()
+    {
         $user = Auth::user();
-        $user -> currentAccessToken()->delete();
+        $user->currentAccessToken()->delete();
         return response()->json(["message" => "Succesfully logged out"], 201);
     }
 
 
-    //test
-    // public function getBackAllUsers(){
-    //     return UserResource::collection(User::all());
-    // }
+    /**
+     * Return authenticated user's own profile data
+     */
+    public function me(Request $request)
+    {
+        $user = $request->user();
+
+        return response()->json([
+            'id'          => $user->id,
+            'name'        => $user->name,
+            'email'       => $user->email,
+        ]);
+    }
 }
