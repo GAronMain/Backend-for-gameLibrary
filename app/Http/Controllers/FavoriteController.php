@@ -22,9 +22,9 @@ class FavoriteController extends Controller
         return FavoriteResource::collection($favorites)->resolve();
     }
 
-    public function store(StoreFavoriteRequest $request, $gameId) 
+    public function store(StoreFavoriteRequest $request, $gameId)
     {
-        $userId = Auth::id(); 
+        $userId = Auth::id();
 
         $favorite = Favorite::create([
             'user_id' => $userId,
@@ -63,5 +63,14 @@ class FavoriteController extends Controller
         }
 
         return response()->noContent();
+    }
+
+    public function adminIndex($userId)
+    {
+        $favorites = Favorite::where('user_id', $userId)
+            ->with('game')
+            ->get();
+
+        return FavoriteResource::collection($favorites);
     }
 }

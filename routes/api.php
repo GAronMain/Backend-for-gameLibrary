@@ -34,4 +34,9 @@ Route::middleware("auth:sanctum")->group(function () {
 
     // === SAJÁT PROFIL ADATOK (ezt kell most hozzáadni) ===
     Route::get('/me', [AuthController::class, 'me']);     // ← EZ AZ ÚJ!
+
+    // Csak adminok számára
+    Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+        Route::get("admin/favorites/{userId}", [FavoriteController::class, "adminIndex"]);
+    });
 });
