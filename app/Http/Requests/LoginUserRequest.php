@@ -16,14 +16,22 @@ class LoginUserRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            "email" => "required|email",
-            "password" => "required|string"
+            'email'    => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'string', 'min:8'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'email.required'    => 'Az email cím megadása kötelező.',
+            'email.email'       => 'Érvénytelen email formátum.',
+            'password.required' => 'A jelszó megadása kötelező.',
+            'password.min'      => 'A jelszó túl rövid.',
         ];
     }
 }

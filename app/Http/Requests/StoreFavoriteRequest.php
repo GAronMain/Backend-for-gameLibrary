@@ -7,35 +7,28 @@ use Illuminate\Validation\Rule;
 
 class StoreFavoriteRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return true;
+        return true;                    // Az igazi jogosultságot a Policy kezeli
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-        "game_id" => [
-            "required",
-            "integer",
-            "exists:games,id",
-            // Ez a rész ellenőrzi, hogy a user_id és game_id páros egyedi-e:
-            Rule::unique('favorites')->where(function ($query) {
-                return $query->where('user_id', auth()->id());
-            }),
-        ]
-    ];
+            'game_id' => [
+                'required',
+                'integer',
+                'exists:games,id',
+                Rule::unique('favorites', 'game_id')
+                    ->where('user_id', auth()->id()),  
+            ],
+        ];
     }
 
-    protected function prepareForValidation()
+    /**
+     * Az URL-ből jövő {gameId} paramétert átalakítjuk game_id mezővé
+     */
+    protected function prepareForValidation(): void
     {
         $this->merge([
             'game_id' => $this->route('gameId'),
@@ -45,10 +38,10 @@ class StoreFavoriteRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'game_id.exists' => 'Ez a játék nem szerepel a kínálatunkban.',
             'game_id.required' => 'A játék azonosítója megadása kötelező.',
-            'game_id.unique' => 'Ez a játék már szerepel a kedvenceid között!', 
+            'game_id.integer'  => 'A játék azonosítójának számnak kell lennie.',
+            'game_id.exists'   => 'Ez a játék nem szerepel az adatbázisban.',
+            'game_id.unique'   => 'Ez a játék már szerepel a kedvenceid között!',
         ];
     }
-
 }

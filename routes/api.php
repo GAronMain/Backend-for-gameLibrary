@@ -27,10 +27,10 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::post("logout", [AuthController::class, "logout"]);
 
     Route::get("favorites", [FavoriteController::class, "index"]);
+    
     Route::get("favorites/{gameId}", [FavoriteController::class, "show"]);
     Route::post("favorites/{gameId}", [FavoriteController::class, "store"]);
     Route::delete("favorites/{gameId}", [FavoriteController::class, "destroy"]);
-    Route::get("favorites/{gameId}", [FavoriteController::class, "show"]);
 
     // === SAJÁT PROFIL ADATOK (ezt kell most hozzáadni) ===
     Route::get('/me', [AuthController::class, 'me']);     // ← EZ AZ ÚJ!

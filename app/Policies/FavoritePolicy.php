@@ -9,56 +9,48 @@ use Illuminate\Auth\Access\Response;
 class FavoritePolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Minden bejelentkezett felhasználó láthatja a saját kedvenceit.
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Csak a saját kedvencét nézheti meg.
      */
     public function view(User $user, Favorite $favorite): bool
     {
-        return false;
+        return $user->id === $favorite->user_id;
     }
 
     /**
-     * Determine whether the user can create models.
+     * Bárki létrehozhat kedvencet (a controllerben a saját user_id-jét kapja).
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Csak a saját kedvencét törölheti.
      */
+    public function delete(User $user, Favorite $favorite): bool
+    {
+        return $user->id === $favorite->user_id;
+    }
+
+    // Update nem szükséges (nincs update endpoint)
     public function update(User $user, Favorite $favorite): bool
     {
         return false;
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     */
-    public function delete(User $user, Favorite $favorite): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
     public function restore(User $user, Favorite $favorite): bool
     {
         return false;
     }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
     public function forceDelete(User $user, Favorite $favorite): bool
     {
         return false;

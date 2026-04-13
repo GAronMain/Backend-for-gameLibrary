@@ -6,11 +6,14 @@ use App\Models\Favorite;
 use App\Http\Requests\StoreFavoriteRequest;
 use App\Http\Requests\UpdateFavoriteRequest;
 use App\Http\Resources\FavoriteResource;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 
 class FavoriteController extends Controller
 {
+    use AuthorizesRequests;
+
     public function index()
     {
         $favorites = Favorite::where('user_id', auth()->id())->get();
@@ -24,6 +27,8 @@ class FavoriteController extends Controller
 
     public function store(StoreFavoriteRequest $request, $gameId)
     {
+        $this->authorize('create', Favorite::class);
+
         $userId = Auth::id();
 
         $favorite = Favorite::create([
