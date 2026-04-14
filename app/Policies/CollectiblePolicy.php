@@ -29,7 +29,7 @@ class CollectiblePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class CollectiblePolicy
      */
     public function update(User $user, Collectible $collectible): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class CollectiblePolicy
      */
     public function delete(User $user, Collectible $collectible): bool
     {
-        return false;
+        return true;
     }
 
     /**

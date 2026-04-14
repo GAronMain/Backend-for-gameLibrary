@@ -27,6 +27,8 @@ class CollectibleController extends Controller
      */
     public function store(StoreCollectibleRequest $request)
     {
+        $this->authorize('create', Collectible::class);
+
         $collectible = Collectible::create($request->validated());
         return CollectibleResource::make($collectible);
     }
@@ -52,6 +54,8 @@ class CollectibleController extends Controller
      */
     public function update(UpdateCollectibleRequest $request, Collectible $collectible)
     {
+        $this->authorize('update', $collectible);
+
         $collectible->update($request->validated());
         return CollectibleResource::make($collectible);
     }
@@ -61,6 +65,8 @@ class CollectibleController extends Controller
      */
     public function destroy(Collectible $collectible)
     {
+        $this->authorize('delete', $collectible);
+        
         $collectible->delete();
         return response()->noContent();
     }

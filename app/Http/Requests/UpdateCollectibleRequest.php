@@ -6,56 +6,43 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCollectibleRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            "game_id" => "required|integer|max:10",
-            "type" => "required|string|max:100",
-            "description" => "required|string|max:155",
-            "images" => "required|array|min:1",
-            'images.*' => 'url',
-            "map_location" => "nullable|array"
+            'game_id'      => 'sometimes|integer|exists:games,id',
+            'type'         => 'sometimes|string|max:100',
+            'description'  => 'sometimes|string|min:10|max:500',
+            'images'       => 'sometimes|array|min:1',
+            'images.*'     => 'sometimes|url|max:500',
+            'map_location' => 'sometimes|nullable|array',
+            'map_location.*' => 'sometimes|nullable|numeric',
         ];
     }
 
     public function messages(): array
-{
-    return [
-        // Játék ID
-        'game_id.required' => 'A játék azonosítója kötelező a frissítéshez.',
-        'game_id.integer' => 'A játék azonosítójának számnak kell lennie.',
-        'game_id.max' => 'Az azonosító nem lehet nagyobb 10-nél.',
+    {
+        return [
+            'game_id.integer'       => 'A játék azonosítójának számnak kell lennie.',
+            'game_id.exists'        => 'A kiválasztott játék nem létezik az adatbázisban.',
 
-        // Típus
-        'type.required' => 'A típus megadása kötelező.',
-        'type.string' => 'A típusnak szövegesnek kell lennie.',
-        'type.max' => 'A típus hossza nem haladhatja meg a 100 karaktert.',
+            'type.string'           => 'A típusnak szöveges formátumnak kell lennie.',
+            'type.max'              => 'A típus maximum 100 karakter hosszú lehet.',
 
-        // Leírás
-        'description.required' => 'A leírás megadása kötelező.',
-        'description.max' => 'A leírás maximum 155 karakter lehet.',
+            'description.min'       => 'A leírás legalább 10 karakter hosszú kell legyen.',
+            'description.max'       => 'A leírás maximum 500 karakter lehet.',
 
-        // Képek
-        'images.required' => 'Legalább egy képet meg kell adnod a frissítés során is.',
-        'images.array' => 'A képek formátuma érvénytelen.',
-        'images.min' => 'Válassz ki legalább egy képet.',
-        'images.*.url' => 'Minden képnek érvényes URL címnek kell lennie.',
+            'images.array'          => 'A képeket tömbként kell beküldened.',
+            'images.min'            => 'Legalább egy kép URL-t adj meg.',
+            'images.*.url'          => 'Minden képnek érvényes URL-nek kell lennie.',
+            'images.*.max'          => 'Egy kép URL-je maximum 500 karakter lehet.',
 
-        // Helyszín
-        'map_location.array' => 'A térkép helyszínének lista (array) formátumban kell lennie.'
-    ];
-}
+            'map_location.array'    => 'A térkép helyszínének tömb formátumban kell lennie.',
+            'map_location.*.numeric'=> 'A koordináták számértékek kell legyenek.',
+        ];
+    }
 }

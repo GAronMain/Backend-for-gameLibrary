@@ -6,59 +6,48 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreCollectibleRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return true;
+        return true; // Az igazi jogosultságot a CollectiblePolicy kezeli
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            "game_id" => "required|integer|exists:games,id",
-            "type" => "required|string|max:100",
-            "description" => "required|string|max:155",
-            "images" => "required|array|min:1",
-            'images.*' => 'url',
-            "map_location" => "nullable|array"
+            'game_id'      => 'required|integer|exists:games,id',
+            'type'         => 'required|string|max:100',
+            'description'  => 'required|string|min:10|max:500',   // 155 helyett 500, mert description TEXT
+            'images'       => 'required|array|min:1',
+            'images.*'     => 'required|url|max:500',
+            'map_location' => 'nullable|array',
+            'map_location.*' => 'nullable|numeric',   // lat és lng számok legyenek
         ];
     }
 
     public function messages(): array
     {
         return [
-            // Játék azonosító
-            'game_id.required' => 'A játék azonosítójának megadása kötelező.',
-            'game_id.integer' => 'A játék azonosítójának számnak kell lennie.',
-            'game_id.max' => 'A játék azonosítója nem lehet nagyobb 10-nél.',
-            // Ha hozzáadod az exists szabályt:
-             'game_id.exists' => 'A kiválasztott játék nem létezik az adatbázisban.',
+            'game_id.required'      => 'A játék azonosítójának megadása kötelező.',
+            'game_id.integer'       => 'A játék azonosítójának számnak kell lennie.',
+            'game_id.exists'        => 'A kiválasztott játék nem létezik az adatbázisban.',
 
-            // Típus (pl. figura, kártya, stb.)
-            'type.required' => 'A típus megadása kötelező.',
-            'type.string' => 'A típusnak szöveges formátumúnak kell lennie.',
-            'type.max' => 'A típus hossza nem haladhatja meg a 100 karaktert.',
+            'type.required'         => 'A kollekció típusának megadása kötelező (pl. Weapon Skin, Character Skin).',
+            'type.string'           => 'A típusnak szöveges formátumnak kell lennie.',
+            'type.max'              => 'A típus maximum 100 karakter hosszú lehet.',
 
-            // Leírás
-            'description.required' => 'A leírás megadása kötelező.',
-            'description.string' => 'A leírásnak szövegnek kell lennie.',
-            'description.max' => 'A leírás maximum 155 karakter lehet.',
+            'description.required'  => 'A leírás megadása kötelező.',
+            'description.min'       => 'A leírás legalább 10 karakter hosszú kell legyen.',
+            'description.max'       => 'A leírás maximum 500 karakter lehet.',
 
-            // Képek (Tömb és URL-ek)
-            'images.required' => 'Legalább egy képet meg kell adnod.',
-            'images.array' => 'A képeket listaként kell beküldened.',
-            'images.min' => 'Adj meg legalább egy kép URL-t.',
-            'images.*.url' => 'A megadott képek mindegyikének érvényes URL-nek kell lennie.',
+            'images.required'       => 'Legalább egy képet meg kell adnod.',
+            'images.array'          => 'A képeket tömbként (array) kell beküldened.',
+            'images.min'            => 'Legalább egy kép URL-t adj meg.',
+            'images.*.required'     => 'Minden kép URL megadása kötelező.',
+            'images.*.url'          => 'Minden képnek érvényes URL-nek kell lennie.',
+            'images.*.max'          => 'Egy kép URL-je maximum 500 karakter lehet.',
 
-            // Térkép helyszín
-            'map_location.array' => 'A térkép koordinátáinak lista formátumban kell lenniük.',
+            'map_location.array'    => 'A térkép helyszínének tömb formátumban kell lennie (pl. [lat, lng]).',
+            'map_location.*.numeric' => 'A koordináták számértékek kell legyenek.',
         ];
     }
 }

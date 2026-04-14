@@ -14,6 +14,13 @@ class CollectibleResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id'           => $this->id,
+            'game_id'      => $this->game_id,
+            'type'         => $this->type,
+            'description'  => $this->description,
+            'images'       => $this->images,
+            'map_location' => $this->map_location,
+        ];
     }
 }
