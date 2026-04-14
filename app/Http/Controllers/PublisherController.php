@@ -27,6 +27,8 @@ class PublisherController extends Controller
      */
     public function store(StorePublisherRequest $request)
     {
+        $this->authorize('create', Publisher::class);
+
         $publisher = Publisher::create($request->validated());
         return PublisherResource::make($publisher);
     }
@@ -52,6 +54,8 @@ class PublisherController extends Controller
      */
     public function update(UpdatePublisherRequest $request, Publisher $publisher)
     {
+        $this->authorize('update', $publisher);
+
         $publisher->update($request->validated());
         return PublisherResource::make($publisher);
     }
@@ -61,6 +65,8 @@ class PublisherController extends Controller
      */
     public function destroy(Publisher $publisher)
     {
+        $this->authorize('delete', $publisher);
+        
         $publisher->delete();
         return response()->noContent();
     }

@@ -7,7 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class GameResource extends JsonResource
 {
-    public static $wrap = null;   // ez jó, hogy nincs "data" wrapper
+    public static $wrap = null;   
 
     public function toArray(Request $request): array
     {
@@ -20,7 +20,7 @@ class GameResource extends JsonResource
             'platforms'     => $this->platforms,
             'cover'         => $this->cover,
             'freetogame_url'=> $this->freetogame_url,
-            // Relációk opcionálisan
+            
             'publisher'     => $this->whenLoaded('publisher'),
             'collectibles_count' => $this->whenCounted('collectibles'),
         ];

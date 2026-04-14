@@ -29,7 +29,7 @@ class PublisherPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class PublisherPolicy
      */
     public function update(User $user, Publisher $publisher): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class PublisherPolicy
      */
     public function delete(User $user, Publisher $publisher): bool
     {
-        return false;
+        return true;
     }
 
     /**
