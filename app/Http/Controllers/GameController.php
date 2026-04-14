@@ -30,6 +30,8 @@ class GameController extends Controller
      */
     public function store(StoreGameRequest $request)
     {
+        $this->authorize('create', Game::class);
+        
         $game = Game::create($request->validated());
         return GameResource::make($game);
     }
@@ -37,10 +39,9 @@ class GameController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($id) //kesz
     {
         $game = Game::find($id);
-
         if (!$game) {
             return response()->json([
                 "success" => false,
@@ -55,6 +56,8 @@ class GameController extends Controller
      */
     public function update(UpdateGameRequest $request, Game $game)
     {
+        $this->authorize('update', $game);
+
         $game->update($request->validated());
         return GameResource::make($game);
     }
@@ -64,6 +67,8 @@ class GameController extends Controller
      */
     public function destroy(Game $game)
     {
+        $this->authorize('delete', $game);
+        
         $game->delete();
         return response()->noContent();
     }

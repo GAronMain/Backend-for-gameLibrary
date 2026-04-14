@@ -13,7 +13,7 @@ class GamePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class GamePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class GamePolicy
      */
     public function update(User $user, Game $game): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class GamePolicy
      */
     public function delete(User $user, Game $game): bool
     {
-        return false;
+        return true;
     }
 
     /**

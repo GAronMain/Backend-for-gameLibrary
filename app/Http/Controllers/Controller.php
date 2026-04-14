@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Routing\Controller as BaseController; // Import the Base Controller
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
 
 abstract class Controller extends BaseController
 {
-    // Now this class has the 'middleware' method
+    use AuthorizesRequests, ValidatesRequests;
 }
