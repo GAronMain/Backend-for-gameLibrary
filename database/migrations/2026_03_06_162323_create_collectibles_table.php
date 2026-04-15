@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('collectibles', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('game_id')->constrained()->cascadeOnDelete();
+            $table->string('type');
+            $table->text('description')->nullable();
+            $table->json('images')->nullable();
+            $table->json('map_location')->nullable();
             $table->timestamps();
         });
     }
