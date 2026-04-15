@@ -9,7 +9,7 @@ class StoreFavoriteRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true;                    // Az igazi jogosultságot a Policy kezeli
+        return true;
     }
 
     public function rules(): array
@@ -20,14 +20,11 @@ class StoreFavoriteRequest extends FormRequest
                 'integer',
                 'exists:games,id',
                 Rule::unique('favorites', 'game_id')
-                    ->where('user_id', auth()->id()),  
+                    ->where('user_id', auth()->id()),
             ],
         ];
     }
 
-    /**
-     * Az URL-ből jövő {gameId} paramétert átalakítjuk game_id mezővé
-     */
     protected function prepareForValidation(): void
     {
         $this->merge([

@@ -12,31 +12,31 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+// ====================== PUBLIC ROUTES ======================
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
 
-//Public Routes
-Route::post("register", [AuthController::class, "register"]);
-Route::post("login", [AuthController::class, "login"]);
+Route::apiResource('games', GameController::class);
+Route::apiResource('publishers', PublisherController::class);
+Route::apiResource('collectibles', CollectibleController::class);
 
+// Egyedi route a game collectibles-hoz
 Route::get('games/{gameId}/collectibles', [GameController::class, 'collectiblesShow']);
-Route::apiResource("games", GameController::class);
-Route::apiResource("publishers", PublisherController::class);
-Route::apiResource("collectibles", CollectibleController::class);
 
-//Protected Routes
-Route::middleware("auth:sanctum")->group(function () {
-    Route::post("logout", [AuthController::class, "logout"]);
+// ====================== PROTECTED ROUTES ======================
+Route::middleware('auth:sanctum')->group(function () {
 
-    Route::get("favorites", [FavoriteController::class, "index"]);
-    
-    Route::get("favorites/{gameId}", [FavoriteController::class, "show"]);
-    Route::post("favorites/{gameId}", [FavoriteController::class, "store"]);
-    Route::delete("favorites/{gameId}", [FavoriteController::class, "destroy"]);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('/me', [AuthController::class, 'me']);
 
-    // === SAJÁT PROFIL ADATOK (ezt kell most hozzáadni) ===
-    Route::get('/me', [AuthController::class, 'me']);     // ← EZ AZ ÚJ!
+    // Favorites
+    Route::get('favorites', [FavoriteController::class, 'index']);
+    Route::post('favorites/{gameId}', [FavoriteController::class, 'store']);
+    Route::get('favorites/{gameId}', [FavoriteController::class, 'show']);
+    Route::delete('favorites/{gameId}', [FavoriteController::class, 'destroy']);
 
-    // Csak adminok számára
-    Route::middleware(['auth:sanctum', 'admin'])->group(function () {
-        Route::get("admin/favorites/{userId}", [FavoriteController::class, "adminIndex"]);
+    // Admin routes
+    Route::middleware('admin')->group(function () {
+        Route::get('admin/favorites/{userId}', [FavoriteController::class, 'adminIndex']);
     });
 });

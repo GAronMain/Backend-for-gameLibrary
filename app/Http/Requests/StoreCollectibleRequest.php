@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreCollectibleRequest extends FormRequest
 {
@@ -15,12 +16,19 @@ class StoreCollectibleRequest extends FormRequest
     {
         return [
             'game_id'      => 'required|integer|exists:games,id',
-            'type'         => 'required|string|max:100',
-            'description'  => 'required|string|min:10|max:500',   // 155 helyett 500, mert description TEXT
+            'type'         => [
+                'required',
+                'string',
+                'max:100',
+                // Egyedi kombináció: ugyanaz a type nem lehet többször ugyanannál a játéknál
+                Rule::unique('collectibles')
+                    ->where('game_id', $this->game_id),
+            ],
+            'description'  => 'required|string|min:10|max:500',
             'images'       => 'required|array|min:1',
             'images.*'     => 'required|url|max:500',
             'map_location' => 'nullable|array',
-            'map_location.*' => 'nullable|numeric',   // lat és lng számok legyenek
+            'map_location.*' => 'nullable|numeric',
         ];
     }
 
