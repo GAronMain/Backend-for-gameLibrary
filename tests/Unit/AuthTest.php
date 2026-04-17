@@ -68,4 +68,28 @@ class AuthTest extends TestCase
                      'email' => $user->email,
                  ]);
     }
+    public function test_user_cannot_register_with_invalid_email()
+    {
+        $response = $this->postJson('/api/register', [
+            'name' => 'Test',
+            'email' => 'invalid-email',
+            'password' => 'Password123!',
+            'password_confirmation' => 'Password123!',
+        ]);
+
+        $response->assertStatus(422)
+                 ->assertJsonValidationErrors('email');
+    }
+
+    public function test_user_cannot_login_with_wrong_password()
+    {
+        User::factory()->create(['email' => 'wrong@example.com']);
+
+        $response = $this->postJson('/api/login', [
+            'email' => 'wrong@example.com',
+            'password' => 'wrongpassword'
+        ]);
+
+        $response->assertStatus(401);
+    }
 }

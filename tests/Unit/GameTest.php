@@ -60,5 +60,24 @@ class GameTest extends TestCase
                  ->assertJsonCount(2)
                  ->assertJsonFragment(['type' => 'Weapon Skin']);
     }
+    public function test_cannot_get_nonexistent_game()
+    {
+        $response = $this->getJson('/api/games/99999');
+        $response->assertStatus(404);
+    }
+
+    public function test_game_response_contains_correct_fields()
+    {
+        $game = Game::factory()->create();
+
+        $response = $this->getJson("/api/games/{$game->id}");
+
+        $response->assertJsonFragment([
+            'id' => $game->id,
+            'name' => $game->name,
+            'release_year' => $game->release_year,
+            'genre' => $game->genre,
+        ]);
+    }
 }
 

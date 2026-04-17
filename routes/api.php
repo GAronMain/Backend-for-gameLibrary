@@ -34,9 +34,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('favorites/{gameId}', [FavoriteController::class, 'store']);
     Route::get('favorites/{gameId}', [FavoriteController::class, 'show']);
     Route::delete('favorites/{gameId}', [FavoriteController::class, 'destroy']);
-
-    // Admin routes
-    Route::middleware('admin')->group(function () {
-        Route::get('admin/favorites/{userId}', [FavoriteController::class, 'adminIndex']);
-    });
 });

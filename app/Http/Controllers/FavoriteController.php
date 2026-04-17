@@ -68,13 +68,4 @@ class FavoriteController extends Controller
 
         return response()->noContent();
     }
-
-    public function adminIndex($userId)
-    {
-        $favorites = Favorite::where('user_id', $userId)
-            ->with('game')
-            ->get();
-
-        return FavoriteResource::collection($favorites);
-    }
 }

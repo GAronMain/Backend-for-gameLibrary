@@ -87,7 +87,7 @@ class GameController extends Controller
             ], 404);
         }
 
-        $collectibles = $game->collectibles;   // feltételezem, hogy van collectibles() relationship a Game modelben
+        $collectibles = $game->collectibles;   
 
         return CollectibleResource::collection($collectibles)->resolve(); 
         // vagy ha nincs CollectibleResource-od: return $collectibles;

@@ -146,9 +146,6 @@
                                                                                 <li class="tocify-item level-2" data-unique="endpoints-DELETEapi-favorites--gameId-">
                                 <a href="#endpoints-DELETEapi-favorites--gameId-">DELETE api/favorites/{gameId}</a>
                             </li>
-                                                                                <li class="tocify-item level-2" data-unique="endpoints-GETapi-admin-favorites--userId-">
-                                <a href="#endpoints-GETapi-admin-favorites--userId-">GET api/admin/favorites/{userId}</a>
-                            </li>
                                                                         </ul>
                             </ul>
             </div>
@@ -160,7 +157,7 @@
     </ul>
 
     <ul class="toc-footer" id="last-updated">
-        <li>Last updated: April 15, 2026</li>
+        <li>Last updated: April 17, 2026</li>
     </ul>
 </div>
 
@@ -704,7 +701,7 @@ access-control-allow-origin: *
             &quot;PC&quot;,
             &quot;PS4&quot;,
             &quot;Xbox One&quot;,
-            &quot;Switch&quot;
+            &quot;Nintendo Switch&quot;
         ],
         &quot;cover&quot;: &quot;https://images.ctfassets.net/w5r1fvmogo3f/5fJySxdWKgRuLfRtdn81O4/4d7c1bf0af3075638a36926bfc1b32ad/3b4965a458fb41958c17ebf4d79475f0.webp&quot;,
         &quot;freetogame_url&quot;: &quot;https://www.freetogame.com/apex-legends&quot;
@@ -1109,6 +1106,56 @@ access-control-allow-origin: *
         ],
         &quot;cover&quot;: &quot;https://8upload.com/image/26c2df2c43520d52/artifact.avif&quot;,
         &quot;freetogame_url&quot;: &quot;&quot;
+    },
+    {
+        &quot;id&quot;: 35,
+        &quot;name&quot;: &quot;Batman: Arkham Asylum&quot;,
+        &quot;release_year&quot;: 2009,
+        &quot;genre&quot;: &quot;Action-adventure&quot;,
+        &quot;publisher_id&quot;: 5,
+        &quot;platforms&quot;: [
+            &quot;Nintendo Switch&quot;,
+            &quot;PS3&quot;,
+            &quot;PS4&quot;,
+            &quot;Xbox One&quot;,
+            &quot;Xbox 360&quot;
+        ],
+        &quot;cover&quot;: &quot;https://cdn.mobygames.com/covers/10210477-batman-arkham-asylum-playstation-3-manual.jpg&quot;,
+        &quot;freetogame_url&quot;: null
+    },
+    {
+        &quot;id&quot;: 40,
+        &quot;name&quot;: &quot;Resident Evil Village&quot;,
+        &quot;release_year&quot;: 2021,
+        &quot;genre&quot;: &quot;Survival Horror&quot;,
+        &quot;publisher_id&quot;: 6,
+        &quot;platforms&quot;: [
+            &quot;PS4&quot;,
+            &quot;PC&quot;,
+            &quot;PS5&quot;,
+            &quot;Xbox One&quot;,
+            &quot;Xbox Series X&quot;,
+            &quot;Nintendo Switch&quot;
+        ],
+        &quot;cover&quot;: &quot;https://i.3djuegos.com/juegos/17369/resident_evil_8/fotos/ficha/resident_evil_8-5847895.jpg&quot;,
+        &quot;freetogame_url&quot;: null
+    },
+    {
+        &quot;id&quot;: 41,
+        &quot;name&quot;: &quot;Batman Arkham City&quot;,
+        &quot;release_year&quot;: 2011,
+        &quot;genre&quot;: &quot;Action-adventure&quot;,
+        &quot;publisher_id&quot;: 5,
+        &quot;platforms&quot;: [
+            &quot;PC&quot;,
+            &quot;Nintendo Switch&quot;,
+            &quot;PS4&quot;,
+            &quot;PS3&quot;,
+            &quot;Xbox 360&quot;,
+            &quot;Xbox One&quot;
+        ],
+        &quot;cover&quot;: &quot;https://th.bing.com/th/id/R.c8de6ca74a08c557633ea887ce6aed4e?rik=GDGcoIRphq8mZA&amp;riu=http%3a%2f%2fupload.wikimedia.org%2fwikipedia%2fen%2f0%2f00%2fBatman_Arkham_City_Game_Cover.jpg&amp;ehk=5RZYsWRgCrneBw10R31ZyDuQMoUHIXQSDraCVaTyQkk%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0&quot;,
+        &quot;freetogame_url&quot;: null
     }
 ]</code>
  </pre>
@@ -1994,6 +2041,18 @@ access-control-allow-origin: *
         &quot;id&quot;: 4,
         &quot;name&quot;: &quot;Embark Studios&quot;,
         &quot;headquarters&quot;: &quot;Stockholm, Sweden&quot;,
+        &quot;is_active&quot;: 1
+    },
+    {
+        &quot;id&quot;: 5,
+        &quot;name&quot;: &quot;Rocksteady Studios&quot;,
+        &quot;headquarters&quot;: &quot;London, United Kingdom&quot;,
+        &quot;is_active&quot;: 1
+    },
+    {
+        &quot;id&quot;: 6,
+        &quot;name&quot;: &quot;Capcom&quot;,
+        &quot;headquarters&quot;: &quot;Japan, Osaka&quot;,
         &quot;is_active&quot;: 1
     }
 ]</code>
@@ -3142,6 +3201,26 @@ access-control-allow-origin: *
             0,
             0
         ]
+    },
+    {
+        &quot;id&quot;: 29,
+        &quot;game_id&quot;: 35,
+        &quot;type&quot;: &quot;Trophy&quot;,
+        &quot;description&quot;: &quot;Riddler Trophies&quot;,
+        &quot;images&quot;: [
+            &quot;https://static1.srcdn.com/wordpress/wp-content/uploads/2020/09/Batman-Arkham-Asylum-Riddler-Trophy.jpg&quot;
+        ],
+        &quot;map_location&quot;: null
+    },
+    {
+        &quot;id&quot;: 36,
+        &quot;game_id&quot;: 41,
+        &quot;type&quot;: &quot;Finding&quot;,
+        &quot;description&quot;: &quot;Mr Freeze&#039;s wife (Nora Fries)&quot;,
+        &quot;images&quot;: [
+            &quot;https://i.ytimg.com/vi/USHamLmCwOU/maxresdefault.jpg&quot;
+        ],
+        &quot;map_location&quot;: null
     }
 ]</code>
  </pre>
@@ -4860,130 +4939,6 @@ You can check the Dev Tools console for debugging information.</code></pre>
  &nbsp;
                 <input type="text" style="display: none"
                               name="gameId"                data-endpoint="DELETEapi-favorites--gameId-"
-               value="architecto"
-               data-component="url">
-    <br>
-<p>Example: <code>architecto</code></p>
-            </div>
-                    </form>
-
-                    <h2 id="endpoints-GETapi-admin-favorites--userId-">GET api/admin/favorites/{userId}</h2>
-
-<p>
-</p>
-
-
-
-<span id="example-requests-GETapi-admin-favorites--userId-">
-<blockquote>Example request:</blockquote>
-
-
-<div class="bash-example">
-    <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/admin/favorites/architecto" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre></div>
-
-
-<div class="javascript-example">
-    <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/admin/favorites/architecto"
-);
-
-const headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre></div>
-
-</span>
-
-<span id="example-responses-GETapi-admin-favorites--userId-">
-    </span>
-<span id="execution-results-GETapi-admin-favorites--userId-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-admin-favorites--userId-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-admin-favorites--userId-"
-      data-empty-response-text="<Empty response>" style="max-height: 400px;"></code></pre>
-</span>
-<span id="execution-error-GETapi-admin-favorites--userId-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-admin-favorites--userId-">
-
-Tip: Check that you&#039;re properly connected to the network.
-If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
-You can check the Dev Tools console for debugging information.</code></pre>
-</span>
-<form id="form-GETapi-admin-favorites--userId-" data-method="GET"
-      data-path="api/admin/favorites/{userId}"
-      data-authed="0"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-admin-favorites--userId-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-admin-favorites--userId-"
-                    onclick="tryItOut('GETapi-admin-favorites--userId-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-admin-favorites--userId-"
-                    onclick="cancelTryOut('GETapi-admin-favorites--userId-');" hidden>Cancel 🛑
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-admin-favorites--userId-"
-                    data-initial-text="Send Request 💥"
-                    data-loading-text="⏱ Sending..."
-                    hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/admin/favorites/{userId}</code></b>
-        </p>
-                <h4 class="fancy-heading-panel"><b>Headers</b></h4>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Content-Type</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Content-Type"                data-endpoint="GETapi-admin-favorites--userId-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                                <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>Accept</code></b>&nbsp;&nbsp;
-&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="Accept"                data-endpoint="GETapi-admin-favorites--userId-"
-               value="application/json"
-               data-component="header">
-    <br>
-<p>Example: <code>application/json</code></p>
-            </div>
-                        <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <div style="padding-left: 28px; clear: unset;">
-                <b style="line-height: 2;"><code>userId</code></b>&nbsp;&nbsp;
-<small>string</small>&nbsp;
- &nbsp;
- &nbsp;
-                <input type="text" style="display: none"
-                              name="userId"                data-endpoint="GETapi-admin-favorites--userId-"
                value="architecto"
                data-component="url">
     <br>
